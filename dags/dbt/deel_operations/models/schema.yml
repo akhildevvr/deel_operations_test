@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: OPERATIONS_INGEST # Schema
+    database: DEEL_INGEST
+    tables:
+      - name: INVOICES  # Table name
+      - name: ORGANIZATIONS  # Table name
+models:
+  - name: invoices_transform
+    columns: 
+      - name: organization_id
+        tests: 
+          - not_null:
+              name: invoices_null_organization_id
+          - unique:
+              name: invoices_unique_organization_id
+      - name: status
+        tests:
+          - accepted_values:
+              name: invoices_accpeted_values_status         
+              values: [skipped, processing,refunded,failed,cancelled,credited,paid,open,pending]
+      - name: amount
+      - name: payment_amount
+  - name: organizations_transform
+    columns: 
+      - name: organization_id
+        tests: 
+          - not_null:
+              name: organizations_null_organization_id
+          - unique:
+              name: organizations_unique_organization_id
+      - name: first_payment_date
+      - name: last_payment_date
+      - name: legal_entity_country_code
+      - name: count_total_contracts_active
+      - name: created_date
+      - name: num_invoices
+      - name: num_transactions
+      - name: days_since_last_payment
+      - name: days_since_first_payment
+
