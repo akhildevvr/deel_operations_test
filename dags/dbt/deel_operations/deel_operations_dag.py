@@ -57,7 +57,7 @@ DBT_DIR = "/Users/ravinda/Documents/deel_operations_test/dags/dbt/deel_operation
 DBT_PROFILES_DIR = "/Users/ravinda/Documents/deel_operations_test/dags/dbt/dbt_profiles"
 
 with DAG(
-    dag_id='tflex_usage_dd_fct',
+    dag_id='deel_operations',
     start_date=datetime(2022, 2, 20),
     max_active_runs=3,
     schedule_interval='0 8 * * *',
