@@ -53,11 +53,8 @@ default_args = {
 
 
 
-DBT_DIR = "/usr/local/airflow/dags/dbt/adp-enterprise"
-DBT_PROFILES_DIR = "/usr/local/airflow/dags/dbt/dbt_profiles"
-DBT_MODEL = "--model tag:tflex_usage_dd_fct"
-DBT_MONITORING_MODEL = "--model tag:token_monitoring"
-FULL_REFRESH_FLAG = f"--full-refresh " if Variable.get("full_refresh", default_var="False") == "True" else ""
+DBT_DIR = "/Users/ravinda/Documents/deel_operations_test/dags/dbt/deel_operations"
+DBT_PROFILES_DIR = "/Users/ravinda/Documents/deel_operations_test/dags/dbt/dbt_profiles"
 
 with DAG(
     dag_id='tflex_usage_dd_fct',
