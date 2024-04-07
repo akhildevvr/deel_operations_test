@@ -5,6 +5,8 @@
 
 ) }}
 
+
+-- Organizations Dimension table
 WITH organizations AS (
     SELECT 
     *

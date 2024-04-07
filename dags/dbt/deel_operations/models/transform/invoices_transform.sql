@@ -4,6 +4,8 @@
 
 ) }}
 
+-- Invoices fact table
+
 WITH invoices AS (
     SELECT 
     *

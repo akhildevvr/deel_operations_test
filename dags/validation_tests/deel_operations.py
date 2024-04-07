@@ -11,7 +11,8 @@ def balance_validation(**context):
     try:
 
 
-        
+        # The following SQL query calculates the positive and negative changes wrt to the payment status. 
+        # It estimates the negative and positive change , and if its more than 50% either way, it returns result.
         sql = '''WITH transaction_summary AS (
                         SELECT
                         organization_id,
@@ -42,7 +43,7 @@ def balance_validation(**context):
         if results.empty == False:
             reason = 'There are oragnizations with over 50% changes in the balance'
             
-
+            # Calls slack notificaton fucntion.
             slack_notification_validation(context, reason)
 
             
