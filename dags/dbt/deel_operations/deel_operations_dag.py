@@ -34,7 +34,7 @@ def snowflake_env_variables(var_snowflake_conn_id):
 
 # Defining success & failure callback functions
 def success_callback(context):
-    success_email(context, args['EMAILS'])
+    print(f"DAG has succeeded")
 
 
 def failure_callback(context):
@@ -58,7 +58,7 @@ DBT_PROFILES_DIR = "/Users/ravinda/Documents/deel_operations_test/dags/dbt/dbt_p
 
 with DAG(
     dag_id='deel_operations',
-    start_date=datetime(2022, 2, 20),
+    start_date=datetime(2024, 4, 07),
     max_active_runs=3,
     schedule_interval='0 8 * * *',
     default_args=default_args,
@@ -105,7 +105,7 @@ with DAG(
         )
     
 
-    success = DummyOperator(task_id='success_email',
+    success = DummyOperator(task_id='success',
                             on_success_callback=success_callback
                             )
 
