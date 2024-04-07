@@ -10,13 +10,26 @@ import os
 import json
 from datetime import datetime, timedelta
 from common.scripts.slack_connect import *
-from include.env_variables import snowflake_env_variables
 from validation_tests.deel_operations import balance_validation
 
 
 
+var_snowflake_conn_id="snowflake_conn"
+def snowflake_env_variables(var_snowflake_conn_id):
+    # Connection configure in the Airflow UI
+    conn = BaseHook.get_connection(var_snowflake_conn_id)
 
+    profile_vars = {}
+    profile_vars['SNOWFLAKE_SVC_USER'] = conn.login
+    profile_vars['SNOWFLAKE_SVC_PASSWD'] = conn.password
+    profile_vars['SNOWFLAKE_SCHEMA'] = conn.schema
+    conn_extras = json.loads(conn.extra)
+    profile_vars['SNOWFLAKE_ROLE'] = conn_extras['role']
+    profile_vars['SNOWFLAKE_DB'] = conn_extras['database']
+    profile_vars['SNOWFLAKE_WAREHOUSE'] = conn_extras['warehouse']
+    profile_vars['SNOWFLAKE_ACCOUNT'] = conn_extras['account']
 
+    return profile_vars
 
 
 # Defining success & failure callback functions
